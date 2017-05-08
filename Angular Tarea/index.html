@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <script src="lib/js/angular.min.js"> </script>
+    <script src="js/app.js"></script>
+    <script src="js/movieController.js"></script>
+    <link rel="stylesheet" href="lib/css/style.css">
+</head>
+
+<body ng-app="moviesView" >
+    
+       <div class="container">
+          <nav class="navbar navbar-inverse" role="navigation">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-ex1-collapse">
+                  <span class="sr-only">Desplegar navegación</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Mejores Peliculas</a>
+          </div>  
+        </div>
+    <div class="container" ng-controller="MovieController as view"> 
+        <div class="row">
+            <div class="col-lg-12">
+                <form class="form-inline" role="form">
+
+                    <div class="form-group">
+                        <label for="search"><strong>Buscar</strong>  Titulo</label>
+                        <input type="search"  id="search" name="name" placeholder="Buscar...." class="form-control" value="" title="" ng-model="view.search">
+                    </div>
+                    <label for="search">Ordenar</label>
+                    <select class="form-control" ng-model="view.sort">
+                        <option value="titulo">Titulo</option>
+                        <option value="director">Director</option>
+                        <option value="produccion">Produccion</option>
+                        
+                    </select>
+                </form>
+            </div>
+        </div>
+        <hr>
+
+
+
+
+
+
+        <div  ng-repeat="movie in view.movies | orderBy:view.sort | filter:view.search">
+            <div class="row">
+
+                <div class="col-lg-2" >
+                    <div class="row">
+                       <img src="./public/img/{{movie.img}}" alt="" class="img-responsive" width="370" height="370">
+                    </div>
+                </div>
+                <div class="col-lg-10" >
+                    <div class="row">
+                        <h5><strong>Titulo:</strong> {{movie.titulo}}</h5> 
+                        <p><strong>Director:</strong> {{movie.director}}</p>
+                        <p><strong>Produccion:</strong> {{movie.produccion}}</p> 
+                        <p><strong>Sinopsis:</strong> {{movie.sinopsis}}</p>
+                        <a href="{{movie.trailer}}" target="_blank"><button type="button" class="btn btn-danger">Ver Tráiler <span class="glyphicon glyphicon-play-circle"></span></button></a>
+                         
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+    </div>
+
+</body>
+</html>
